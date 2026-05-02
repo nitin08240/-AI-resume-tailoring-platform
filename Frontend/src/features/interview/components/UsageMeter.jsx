@@ -7,7 +7,8 @@ const UsageMeter = () => {
 
     const fetchStats = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3000/api/interview/usage-stats', { withCredentials: true });
+            const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+            const { data } = await axios.get(`${baseURL}/api/interview/usage-stats`, { withCredentials: true });
             setStats(data);
         } catch (err) {
             console.error('Failed to fetch usage stats:', err);
