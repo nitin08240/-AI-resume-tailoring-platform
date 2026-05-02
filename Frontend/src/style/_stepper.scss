@@ -1,0 +1,237 @@
+// ── Stepper Progress Bar ──────────────────────────────────────────────────────
+.stepper-progress {
+  width: 100%;
+  max-width: 900px;
+  height: 4px;
+  background-color: var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+
+  &__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-accent), #ff6b9d);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+// ── Step Indicators Row ───────────────────────────────────────────────────────
+.stepper-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 1.5rem;
+}
+
+.stepper-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  position: relative;
+
+  &__bubble {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg-card);
+    flex-shrink: 0;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    z-index: 1;
+  }
+
+  &__label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+
+  // Connector line between tabs
+  &::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background-color: var(--color-border);
+    margin: 0 0.4rem;
+    transition: background-color 0.3s;
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+
+  // Active step
+  &--active {
+    .stepper-tab__bubble {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(255, 45, 120, 0.2);
+    }
+    .stepper-tab__label {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+  }
+
+  // Completed step
+  &--done {
+    .stepper-tab__bubble {
+      background-color: var(--color-success);
+      border-color: var(--color-success);
+      color: #fff;
+    }
+    .stepper-tab__label {
+      color: var(--color-success);
+    }
+    &::after {
+      background-color: var(--color-success);
+    }
+  }
+}
+
+// ── Step Panel (the animated sliding card body) ───────────────────────────────
+.stepper-body {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.step-panel {
+  animation: step-slide-in 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+  &--exit {
+    animation: step-slide-out 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+@keyframes step-slide-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes step-slide-out {
+  from { opacity: 1; transform: translateX(0);     }
+  to   { opacity: 0; transform: translateX(-40px); }
+}
+
+// ── Step Navigation Footer Buttons ───────────────────────────────────────────
+.stepper-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+
+  .stepper-nav__back {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    cursor: pointer;
+    font-family: var(--font-stack);
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: var(--color-text-muted);
+      color: var(--color-text-primary);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+
+  .stepper-nav__next {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #d91060 100%);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.4rem;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-stack);
+    transition: opacity 0.2s, transform 0.1s;
+
+    &:hover  { opacity: 0.88; }
+    &:active { transform: scale(0.97); }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ── Step Content Wrappers ─────────────────────────────────────────────────────
+.step-content {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 340px;
+
+  &__heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  &__sub {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: -0.75rem 0 0;
+    line-height: 1.5;
+  }
+}
+
+// ── Review Step Summary ───────────────────────────────────────────────────────
+.review-item {
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  &__label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-accent);
+  }
+
+  &__value {
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    max-height: 80px;
+    overflow-y: auto;
+  }
+}

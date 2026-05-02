@@ -1,0 +1,44 @@
+// ── CSS Custom Properties ─────────────────────────────────────────────────────
+// :root  = light theme
+// html.dark = dark theme (default on first load, saved to localStorage)
+
+:root {
+  --color-bg-page:     #f4f6fb;
+  --color-bg-card:     #ffffff;
+  --color-bg-panel:    #f0f2f8;
+  --color-bg-input:    #e8ecf4;
+  --color-border:      #d0d7e6;
+  --color-text-primary:#111827;
+  --color-text-muted:  #6b7280;
+  --color-accent:      #e1034d;
+  --color-accent-alt:  #ff2d78;
+  --color-success:     #16a34a;
+  --color-warning:     #d97706;
+  --color-error:       #dc2626;
+  --color-info:        #2563eb;
+  --color-severity-high:   #dc2626;
+  --color-severity-medium: #d97706;
+  --color-severity-low:    #16a34a;
+  --font-stack: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+                'Segoe UI', Roboto, sans-serif;
+}
+
+// ── Dark Theme (default — matches existing app palette) ───────────────────────
+html.dark {
+  --color-bg-page:     #0d1117;
+  --color-bg-card:     #161b22;
+  --color-bg-panel:    #1c2230;
+  --color-bg-input:    #1e2535;
+  --color-border:      #2a3348;
+  --color-text-primary:#e6edf3;
+  --color-text-muted:  #7d8590;
+  --color-accent:      #ff2d78;
+  --color-accent-alt:  #ff6b9d;
+  --color-success:     #3fb950;
+  --color-warning:     #f5a623;
+  --color-error:       #ff4d4d;
+  --color-info:        #4a90e2;
+  --color-severity-high:   #ff4d4d;
+  --color-severity-medium: #f5a623;
+  --color-severity-low:    #3fb950;
+}

@@ -1,0 +1,296 @@
+// ── Dashboard Stats Row ───────────────────────────────────────────────────────
+.dashboard-stats {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 900px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 180px;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.85rem;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: border-color 0.2s, transform 0.18s;
+
+  &:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 0.6rem;
+    background-color: var(--color-bg-panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  &__label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+}
+
+// ── Skill Match Meter (SVG Gauge) ─────────────────────────────────────────────
+.skill-meter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+
+  &__label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  &__gauge-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+  }
+
+  &__svg {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    z-index: 1;
+  }
+
+  &__score {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  &__pct {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-top: -2px;
+  }
+
+  &__sub {
+    margin: 0;
+    font-size: 0.75rem;
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
+// ── Empty State ───────────────────────────────────────────────────────────────
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 2rem;
+  text-align: center;
+
+  &__heading {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  &__sub {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    max-width: 340px;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+// ── Keyword Gaps ──────────────────────────────────────────────────────────────
+.keyword-gaps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  &__group-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+}
+
+// ── Spinner animation (used in loading screen) ────────────────────────────────
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// ── User Dropdown ────────────────────────────────────────────────────────────
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        background-color: var(--color-bg-card);
+        border: 1px solid var(--color-border);
+        padding: 0.35rem 0.65rem;
+        border-radius: 2rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+        &:hover {
+            border-color: var(--color-accent);
+            background-color: var(--color-bg-panel);
+        }
+    }
+
+    &__avatar {
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, var(--color-accent), var(--color-accent-alt));
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        box-shadow: 0 0 10px rgba(225, 3, 77, 0.3);
+    }
+
+    &__username {
+        font-size: 0.85rem;
+        font-weight: 550;
+        color: var(--color-text-primary);
+    }
+
+    &__chevron {
+        color: var(--color-text-muted);
+        transition: transform 0.2s;
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        top: calc(100% + 0.6rem);
+        right: 0;
+        min-width: 200px;
+        background-color: var(--color-bg-card);
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        padding: 0.5rem;
+        z-index: 1100;
+        animation: dropdownSlide 0.2s ease-out;
+    }
+
+    &__header {
+        padding: 0.75rem 1rem;
+    }
+
+    &__header-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        margin: 0;
+    }
+
+    &__header-email {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        margin: 0;
+    }
+
+    &__divider {
+        height: 1px;
+        background-color: var(--color-border);
+        margin: 0.5rem 0;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        width: 100%;
+        padding: 0.65rem 1rem;
+        background: none;
+        border: none;
+        border-radius: 0.5rem;
+        color: var(--color-text-primary);
+        font-size: 0.85rem;
+        font-family: var(--font-stack);
+        cursor: pointer;
+        transition: all 0.15s;
+
+        &:hover {
+            background-color: var(--color-bg-panel);
+        }
+
+        &--logout {
+            color: var(--color-error);
+            &:hover {
+                background-color: rgba(220, 38, 38, 0.08);
+            }
+        }
+    }
+}
+
+@keyframes dropdownSlide {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

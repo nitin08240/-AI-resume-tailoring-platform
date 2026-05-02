@@ -1,0 +1,81 @@
+// ── Shimmer Keyframe ──────────────────────────────────────────────────────────
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+// ── Base Skeleton Element ─────────────────────────────────────────────────────
+.skeleton {
+  border-radius: 0.4rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-panel) 25%,
+    var(--color-bg-input) 50%,
+    var(--color-bg-panel) 75%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+// ── Skeleton Card ─────────────────────────────────────────────────────────────
+.skeleton-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &__title  { @extend .skeleton; height: 1rem; width: 60%; }
+  &__line   { @extend .skeleton; height: 0.8rem; width: 100%; }
+  &__line--short { @extend .skeleton; height: 0.8rem; width: 40%; }
+}
+
+// ── Skeleton Report (full report page) ───────────────────────────────────────
+.skeleton-report {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem 2rem;
+
+  &__heading  { @extend .skeleton; height: 1.4rem; width: 45%; margin-bottom: 0.5rem; }
+  &__sub      { @extend .skeleton; height: 0.85rem; width: 25%; border-radius: 2rem; }
+
+  &__block {
+    background-color: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: 0.6rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    .skeleton-report__line       { @extend .skeleton; height: 0.85rem; width: 100%; }
+    .skeleton-report__line--med  { @extend .skeleton; height: 0.85rem; width: 70%; }
+    .skeleton-report__line--short{ @extend .skeleton; height: 0.85rem; width: 45%; }
+  }
+}
+
+// ── Skeleton Stats Row (dashboard) ───────────────────────────────────────────
+.skeleton-stats {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 900px;
+
+  &__card {
+    flex: 1;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    .skeleton-stats__value { @extend .skeleton; height: 1.6rem; width: 50%; }
+    .skeleton-stats__label { @extend .skeleton; height: 0.7rem; width: 70%; }
+  }
+}

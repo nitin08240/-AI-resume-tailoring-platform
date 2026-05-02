@@ -1,0 +1,76 @@
+.usage-meter {
+    background-color: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1rem;
+
+    &__title {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text-muted);
+        margin: 0;
+    }
+
+    &__reset {
+        font-size: 0.7rem;
+        color: var(--color-accent);
+        margin: 0;
+        font-weight: 500;
+        text-align: center;
+        background-color: rgba(225, 3, 77, 0.05);
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+    }
+}
+
+.usage-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__label {
+        font-size: 0.75rem;
+        color: var(--color-text-primary);
+        font-weight: 500;
+    }
+
+    &__count {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--color-text-muted);
+
+        &--limit {
+            color: var(--color-error);
+        }
+    }
+
+    &__track {
+        height: 6px;
+        background-color: var(--color-bg-input);
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    &__fill {
+        height: 100%;
+        background: linear-gradient(to right, var(--color-accent), var(--color-accent-alt));
+        border-radius: 1rem;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &--limit {
+            background: var(--color-error);
+        }
+    }
+}
