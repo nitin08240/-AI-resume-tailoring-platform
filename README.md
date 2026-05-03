@@ -1,10 +1,12 @@
 # 🚀 AI Resume Tailoring & Interview Prep Platform
 
-An intelligent, full-stack ecosystem designed to bridge the gap between your current resume and your dream job. By leveraging the power of **Google Gemini 2.5 AI**, this platform analyzes job descriptions, identifies skill gaps, and generates perfectly tailored resumes and interview strategies.
+An intelligent, full-stack ecosystem designed to bridge the gap between your current resume and your dream job. By leveraging the power of **Google Gemini 1.5 AI**, this platform analyzes job descriptions, identifies skill gaps, and generates perfectly tailored resumes and interview strategies.
+
+[**Live Demo 🚀**](https://ai-resume-tailoring-platform.vercel.app/)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/nitin08240/-AI-resume-tailoring-platform?style=for-the-badge&color=ff2d78)
 ![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue?style=for-the-badge)
-![AI Engine](https://img.shields.io/badge/AI-Gemini%202.5-orange?style=for-the-badge)
+![AI Engine](https://img.shields.io/badge/AI-Gemini%201.5-orange?style=for-the-badge)
 
 ---
 
@@ -36,7 +38,7 @@ Download your newly tailored resume as a professional, ATS-friendly PDF powered 
 | :--- | :--- |
 | **Frontend** | React 19, Vite, SCSS (Modular), Framer Motion, Axios |
 | **Backend** | Node.js, Express, MongoDB, Mongoose |
-| **AI/ML** | Google Gemini 2.5 (Flash/Pro) |
+| **AI/ML** | Google Gemini 1.5 (Flash/Pro) |
 | **Utilities** | Puppeteer (PDF Rendering), PDF-Parse, JWT, Bcrypt |
 
 ---

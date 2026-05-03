@@ -16,7 +16,7 @@ async function generateInterViewReportController(req, res) {
             })
         }
 
-        const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
+        const resumeContent = await pdfParse(req.file.buffer)
         const { selfDescription, jobDescription } = req.body
 
         if (!selfDescription || !jobDescription) {
