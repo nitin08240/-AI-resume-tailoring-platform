@@ -1,10 +1,16 @@
+require("dotenv").config()
 const { GoogleGenAI } = require("@google/genai")
 const { z } = require("zod")
 const { zodToJsonSchema } = require("zod-to-json-schema")
 const puppeteer = require("puppeteer")
 
+const genAiApiKey = process.env.GOOGLE_GENAI_API_KEY
+if (!genAiApiKey) {
+    throw new Error("GOOGLE_GENAI_API_KEY environment variable is required")
+}
+
 const ai = new GoogleGenAI({
-    apiKey: process.env.GOOGLE_GENAI_API_KEY
+    apiKey: genAiApiKey
 })
 
 
@@ -68,9 +74,9 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
     const result = await ai.models.generateContent({
         model: "gemini-2.5-flash",
         contents: prompt,
-        generationConfig: {
+        config: {
             responseMimeType: "application/json",
-            responseSchema: zodToJsonSchema(interviewReportSchema),
+            responseJsonSchema: zodToJsonSchema(interviewReportSchema),
         }
     })
 
@@ -124,9 +130,9 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
     const result = await ai.models.generateContent({
         model: "gemini-2.5-flash",
         contents: prompt,
-        generationConfig: {
+        config: {
             responseMimeType: "application/json",
-            responseSchema: zodToJsonSchema(resumePdfSchema),
+            responseJsonSchema: zodToJsonSchema(resumePdfSchema),
         }
     })
 
