@@ -1,4 +1,4 @@
-const pdfParse = require("pdf-parse").default || require("pdf-parse")
+const { PDFParse } = require("pdf-parse")
 const { generateInterviewReport, generateResumePdf } = require("../services/ai.services")
 const interviewReportModel = require("../models/interviewReport.model")
 
@@ -18,7 +18,9 @@ async function generateInterViewReportController(req, res) {
 
         let resumeContent;
         try {
-            resumeContent = await pdfParse(req.file.buffer)
+            const pdfParser = new PDFParse()
+            resumeContent = await pdfParser.parseBuffer(req.file.buffer)
+            
             if (!resumeContent || !resumeContent.text) {
                 throw new Error("PDF parsing returned no text content")
             }
