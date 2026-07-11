@@ -1,4 +1,4 @@
-const pdf = require("pdf-parse")
+const pdfParse = require("pdf-parse")
 const { generateInterviewReport, generateResumePdf } = require("../services/ai.services")
 const interviewReportModel = require("../models/interviewReport.model")
 
@@ -16,7 +16,16 @@ async function generateInterViewReportController(req, res) {
             })
         }
 
-        const resumeContent = await pdf(req.file.buffer)
+        let resumeContent;
+        try {
+            resumeContent = await pdfParse(req.file.buffer)
+        } catch (pdfErr) {
+            console.error("PDF parsing error:", pdfErr)
+            return res.status(400).json({
+                message: "Invalid PDF file",
+                error: pdfErr.message
+            })
+        }
         const { selfDescription, jobDescription } = req.body
 
         if (!selfDescription || !jobDescription) {
