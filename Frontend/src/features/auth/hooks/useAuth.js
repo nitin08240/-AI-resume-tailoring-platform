@@ -20,6 +20,9 @@ export const useAuth = () => {
             if (!data || !data.user) {
                 throw new Error("Failed to login")
             }
+            if (data.token) {
+                localStorage.setItem("token", data.token)
+            }
             setUser(data.user)
             return data.user
         } catch (err) {
@@ -40,6 +43,9 @@ export const useAuth = () => {
             if (!data || !data.user) {
                 throw new Error("Failed to register")
             }
+            if (data.token) {
+                localStorage.setItem("token", data.token)
+            }
             setUser(data.user)
             return data.user
         } catch (err) {
@@ -54,9 +60,11 @@ export const useAuth = () => {
         setLoading(true)
         try {
             await logout()
+            localStorage.removeItem("token")
             setUser(null)
         } catch (err) {
             console.error("Logout error:", err)
+            localStorage.removeItem("token")
             setUser(null)
         } finally {
             setLoading(false)

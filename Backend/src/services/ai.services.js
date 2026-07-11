@@ -13,6 +13,33 @@ const ai = new GoogleGenAI({
     apiKey: genAiApiKey
 })
 
+function parseMaybeJsonString(value) {
+    if (typeof value !== 'string') return value
+    const trimmed = value.trim()
+    if ((trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
+        try {
+            return JSON.parse(trimmed)
+        } catch (err) {
+            return value
+        }
+    }
+    return value
+}
+
+function normalizeArrayOfObjects(arr) {
+    if (!Array.isArray(arr)) return arr
+    return arr.map(item => parseMaybeJsonString(item))
+}
+
+function normalizeInterviewReport(report) {
+    return {
+        ...report,
+        technicalQuestions: normalizeArrayOfObjects(report.technicalQuestions),
+        behavioralQuestions: normalizeArrayOfObjects(report.behavioralQuestions),
+        skillGaps: normalizeArrayOfObjects(report.skillGaps),
+        preparationPlan: normalizeArrayOfObjects(report.preparationPlan),
+    }
+}
 
 const interviewReportSchema = z.object({
     matchScore: z.number().describe("A score between 0 and 100 indicating how well the candidate's profile matches the job describe"),
@@ -41,7 +68,9 @@ const interviewReportSchema = z.object({
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
     const prompt = `You are an expert technical interviewer. Based on the candidate's Resume, Self Description, and the Job Description provided, generate a COMPREHENSIVE interview preparation report in JSON format.
     
-    CRITICAL: You MUST return a JSON object that EXACTLY matches this structure:
+    CRITICAL: You MUST return a JSON object that EXACTLY matches this structure.
+    Do not wrap objects or arrays inside strings. All arrays must contain real JSON objects, not string values.
+
     {
       "title": "A relevant title for this report",
       "matchScore": (a number between 0 and 100),
@@ -86,10 +115,11 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
     if (!text) throw new Error("AI returned empty response");
     
     // Extract JSON from potential markdown/text wrapper
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    const jsonMatch = text.match(/\{[\s\S]*\}$/);
     if (!jsonMatch) throw new Error("No JSON object found in AI response");
     
-    return JSON.parse(jsonMatch[0])
+    const rawReport = JSON.parse(jsonMatch[0])
+    return normalizeInterviewReport(rawReport)
 }
 
 async function generatePdfFromHtml(htmlContent) {
